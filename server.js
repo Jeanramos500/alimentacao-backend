@@ -5,8 +5,8 @@ const server = express();
 server.use(express.json());
 
 const alimentos = [
-        {nome:'Arroz', quantidade: 2},
-        {nome: 'Feijao', quantidade: 3}  
+        {nome:'Arroz', quantidade: 2, gramas : 240},
+        {nome: 'Feijao', quantidade: 3, gramas : 2450}  
 ]
 
 server.get('/alimentacao2', function(request, response) {
