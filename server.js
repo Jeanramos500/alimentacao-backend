@@ -15,25 +15,23 @@ server.get('/alimentacao2', function(request, response) {
 
 server.post('/alimentacao2', function(request, response){
     
-    //const nome = request.body.nome;
-    //const quantidade = request.body.quantidade;
-    
     const {nome, quantidade} = request.body;
 
-    alimentos.push({nome, quantidade});
+    alimentos.push({nome, quantidade, gramas});
     response.status(204).send();
 
 })
 
  server.put('/alimentacao2/:id', function(request,response){
     const id= request.params.id;  
-    const {nome, quantidade} = request.body;
+    const {nome, quantidade, gramas} = request.body;
 
     for(let i = 0 ; i <alimentos.length; i++)
     {
         if(alimentos[i].nome == id ){
             alimentos[i].nome = nome;
             alimentos[i].quantidade = quantidade;
+            alimentos[i].gramas = gramas;
             break;
         }
     }  
