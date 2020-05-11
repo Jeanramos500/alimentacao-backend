@@ -9,11 +9,11 @@ const alimentos = [
         {nome: 'Feijao', quantidade: 3}  
 ]
 
-server.get('/alimentacao', function(request, response) {
+server.get('/alimentacao2', function(request, response) {
     response.json(alimentos);
 })
 
-server.post('/alimentacao', function(request, response){
+server.post('/alimentacao2', function(request, response){
     
     //const nome = request.body.nome;
     //const quantidade = request.body.quantidade;
@@ -25,7 +25,7 @@ server.post('/alimentacao', function(request, response){
 
 })
 
- server.put('/alimentacao/:id', function(request,response){
+ server.put('/alimentacao2/:id', function(request,response){
     const id= request.params.id;  
     const {nome, quantidade} = request.body;
 
@@ -41,7 +41,7 @@ server.post('/alimentacao', function(request, response){
     return response.status(204).send()
  })
 
- server.delete('/alimentacao/:id', function(request, response){
+ server.delete('/alimentacao2/:id', function(request, response){
     const id= request.params.id;  
     
     for(let i = 0 ; i <alimentos.length; i++)
