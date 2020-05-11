@@ -5,17 +5,16 @@ const server = express();
 server.use(express.json());
 
 const alimentos = [
-        {nome:'Arroz', quantidade: 2, gramas : 240},
-        {nome: 'Feijao', quantidade: 3, gramas : 2450}  
-]
-
+        {id:1, nome:'Arroz', quantidade: 2, gramas : 240}, 
+        {id:2, nome: 'Feijao', quantidade: 3, gramas : 2450}]
+ 
 server.get('/alimentacao2', function(request, response) {
     response.json(alimentos);
 })
 
 server.post('/alimentacao2', function(request, response){
     
-    const {nome, quantidade} = request.body;
+    const {nome, quantidade,gramas} = request.body;
 
     alimentos.push({nome, quantidade, gramas});
     response.status(204).send();
