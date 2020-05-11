@@ -4,6 +4,8 @@ const server = express();
 
 server.use(express.json());
 
+// Deixando em momoria volatil
+
 const alimentos = [
         { nome:'Frango', quantidade: 2, gramas : 240}, 
         { nome: 'Batata', quantidade: 3, gramas : 2450}]
@@ -11,6 +13,8 @@ const alimentos = [
 server.get('/alimentacao2', function(request, response) {
     response.json(alimentos);
 })
+
+//Realizando o insert
 
 server.post('/alimentacao2', function(request, response){
     
@@ -20,6 +24,8 @@ server.post('/alimentacao2', function(request, response){
     response.status(204).send();
 
 })
+
+ //Fazer o Update
 
  server.put('/alimentacao2/:id', function(request,response){
     const id= request.params.id;  
@@ -37,6 +43,8 @@ server.post('/alimentacao2', function(request, response){
     
     return response.status(204).send()
  })
+
+ //Realizar Delete
 
  server.delete('/alimentacao2/:id', function(request, response){
     const id= request.params.id;  
