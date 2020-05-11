@@ -14,20 +14,21 @@ server.get('/alimentacao2', function(request, response) {
 
 server.post('/alimentacao2', function(request, response){
     
-    const {nome, quantidade,gramas} = request.body;
+    const {id, nome, quantidade,gramas} = request.body;
 
-    alimentos.push({nome, quantidade, gramas});
+    alimentos.push({id,nome, quantidade, gramas});
     response.status(204).send();
 
 })
 
  server.put('/alimentacao2/:id', function(request,response){
     const id= request.params.id;  
-    const {nome, quantidade, gramas} = request.body;
+    const {id,nome, quantidade, gramas} = request.body;
 
     for(let i = 0 ; i <alimentos.length; i++)
     {
         if(alimentos[i].nome == id ){
+            alimentos[i].id = id;
             alimentos[i].nome = nome;
             alimentos[i].quantidade = quantidade;
             alimentos[i].gramas = gramas;
