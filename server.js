@@ -4,6 +4,37 @@ const server = express();
 
 server.use(express.json());
 
+const Pool = require('pg').Pool;
+
+const pool = new Pool({
+
+    user: 'dhapoprfqydkdm',
+    password: '7b7f1b8e5f72fa62788a3c479dc1edc968b891245d281dbed07a59c33b2c087f',
+    host: 'ec2-18-233-32-61.compute-1.amazonaws.com',
+    database:'d3v8g2hjv8neib',
+    port:5432,
+    ssl: {
+        rejectUnauthorized: false
+    }
+})
+     
+    const sqltabela = `
+    CREATE TABLE IF NOT EXISTS alimentos
+    (
+        id serial primary key,
+        nome varchar(255) null,
+        quantidade int null,
+        gramas float null
+
+    )`;
+
+    pool.query(sqltabela, (error,result)=>{
+        if(error){
+            throw error
+        }
+
+        console.log('Tabela criada com sucesso');
+    })
 // Deixando em momoria volatil
 
 const alimentos = [
