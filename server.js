@@ -17,6 +17,9 @@ const pool = new Pool({
         rejectUnauthorized: false
     }
 })
+    const lista = [
+        { nome:'Frango', quantidade: 2, gramas : 240}, 
+        { nome: 'Batata', quantidade: 3, gramas : 2450}]
      
     const sqltabela = `
     CREATE TABLE IF NOT EXISTS alimentos
