@@ -35,6 +35,60 @@ const pool = new Pool({
 
         console.log('Tabela criada com sucesso');
     })
+
+
+    //GET
+server.get('/alimentos', async function(request, response) {
+   result = await pool.query('SELECT * FROM alimentos');
+
+   return response.json(result.rows);
+})
+
+server.get('/alimentos/search', async function(request, response) {
+    const nome = request.query.nome;
+    const sql = `SELECT * FROM alimentos WHERE nome ILIKE $1`;
+    const result = await pool.query(sql, ["%" +  nome + "%"]);
+    return response.json(result.rows);
+})
+
+server.get('/alimentos/:id', async function(request, response) {
+    const id = request.params.id;
+    const sql = `SELECT * FROM alimentos WHERE id = $1`
+    const result = await pool.query(sql, [id]);
+    return response.json(result.rows);
+})
+
+
+//POST
+server.post('/alimentos', async function(request, response) {
+    const nome = request.body.nome;
+    const quantidade = request.body.diretor;
+    const gramas = request.body.ano;
+    const sql= `INSERT INTO alimeentos (nome, quantidade, gramas) VALUES ($1, $2, $3)`;
+    await pool.query(sql, [nome, quantidade, gramas]);
+    return response.status(204).send();
+})
+
+
+//DELETE
+server.delete('/aliementos/:id', async function(request, response) {
+    const id = request.params.id;
+    const sql = `DELETE FROM alimentos WHERE id = $1`;
+    await pool.query(sql, [id]);
+    return response.status(204).send();
+})
+
+
+//UPDATE
+server.put('/alimentos/:id', async function(request, response) {
+    const id = request.params.id;
+    const { nome, quantidade, gramas} = request.body;
+    const sql = `UPDATE alimentos SET nome = $1, quantidade = $2, gramas = $3  WHERE id = $4`;
+    await pool.query(sql, [nome, quantidade, gramas, id]);
+    return response.status(204).send();
+})
+
+/*
 // Deixando em momoria volatil
 
 const alimentos = [
@@ -45,15 +99,12 @@ server.get('/alimentacao2', function(request, response) {
     response.json(alimentos);
 })
 
-//Realizando o insert
+//Realizando o insert Memorari volatil
 
-server.post('/alimentacao2', function(request, response){
-    
+server.post('/alimentacao2', function(request, response){   
     const {nome, quantidade,gramas} = request.body;
-
     alimentos.push({nome, quantidade, gramas});
     response.status(204).send();
-
 })
 
  //Fazer o Update
@@ -88,5 +139,6 @@ server.post('/alimentacao2', function(request, response){
         }
     }
     return response.status(204).send();
- })
+ })*/
+ 
 server.listen(process.env.PORT || 3000);
