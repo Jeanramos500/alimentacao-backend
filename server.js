@@ -17,11 +17,11 @@ const pool = new Pool({
         rejectUnauthorized: false
     }
 })
-    const alimentos2 = [
+    const alimentos = [
         { nome:'Frango', quantidade: 2, gramas : 240}, 
         { nome: 'Batata', quantidade: 3, gramas : 2450}]
  
-    server.get('/alimentos', function(request, response) {
+    server.get('/alimentacao2', function(request, response) {
         response.json(alimentos);
 })
      
@@ -45,20 +45,20 @@ const pool = new Pool({
 
 
     //GET
-server.get('/alimentos', async function(request, response) {
+server.get('/alimentacao2', async function(request, response) {
    result = await pool.query('SELECT * FROM alimentos');
 
    return response.json(result.rows);
 })
 
-server.get('/alimentos/search', async function(request, response) {
+server.get('/alimentacao2/search', async function(request, response) {
     const nome = request.query.nome;
     const sql = `SELECT * FROM alimentos WHERE nome ILIKE $1`;
     const result = await pool.query(sql, ["%" +  nome + "%"]);
     return response.json(result.rows);
 })
 
-server.get('/alimentos/:id', async function(request, response) {
+server.get('/alimentacao2/:id', async function(request, response) {
     const id = request.params.id;
     const sql = `SELECT * FROM alimentos WHERE id = $1`
     const result = await pool.query(sql, [id]);
@@ -67,18 +67,18 @@ server.get('/alimentos/:id', async function(request, response) {
 
 
 //POST
-server.post('/alimentos', async function(request, response) {
+server.post('/alimentacao2', async function(request, response) {
     const nome = request.body.nome;
     const quantidade = request.body.diretor;
     const gramas = request.body.ano;
-    const sql= `INSERT INTO alimeentos (nome, quantidade, gramas) VALUES ($1, $2, $3)`;
+    const sql= `INSERT INTO alimentos (nome, quantidade, gramas) VALUES ($1, $2, $3)`;
     await pool.query(sql, [nome, quantidade, gramas]);
     return response.status(204).send();
 })
 
 
 //DELETE
-server.delete('/aliementos/:id', async function(request, response) {
+server.delete('/alimentacao2/:id', async function(request, response) {
     const id = request.params.id;
     const sql = `DELETE FROM alimentos WHERE id = $1`;
     await pool.query(sql, [id]);
@@ -87,7 +87,7 @@ server.delete('/aliementos/:id', async function(request, response) {
 
 
 //UPDATE
-server.put('/alimentos/:id', async function(request, response) {
+server.put('/alimentacao2/:id', async function(request, response) {
     const id = request.params.id;
     const { nome, quantidade, gramas} = request.body;
     const sql = `UPDATE alimentos SET nome = $1, quantidade = $2, gramas = $3  WHERE id = $4`;
