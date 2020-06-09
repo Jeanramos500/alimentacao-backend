@@ -67,8 +67,8 @@ server.get('/alimentacao/:id', async function(request, response) {
 //POST
 server.post('/alimentacao', async function(request, response) {
     const nome = request.body.nome;
-    const quantidade = request.body.diretor;
-    const gramas = request.body.ano;
+    const quantidade = request.body.quantidade;
+    const gramas = request.body.gramas;
     const sql= `INSERT INTO alimentacao2 (nome, quantidade, gramas) VALUES ($1, $2, $3)`;
     await pool.query(sql, [nome, quantidade, gramas]);
     return response.status(204).send();
