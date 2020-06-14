@@ -27,9 +27,9 @@ const pool = new Pool({
     CREATE TABLE IF NOT EXISTS alimentacao2
     (
         id serial primary key,
-        nome varchar(255) null,
-        quantidade int null,
-        gramas float null
+        nome varchar(255) ,
+        quantidade int ,
+        gramas float 
 
     )`;
 
