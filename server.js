@@ -21,7 +21,6 @@ const pool = new Pool({
         rejectUnauthorized: false
     }
 })
-    
      
     const sqltabela = `
     CREATE TABLE IF NOT EXISTS alimentacao2
